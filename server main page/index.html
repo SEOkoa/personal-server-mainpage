@@ -1,0 +1,229 @@
+<!-- Special thanks to
+    js 라디오 버튼 연동 https://hoon2kc.tistory.com/entry/메뉴-클릭하면-이미지-변경
+    js 이미지 업로드 https://developer-talk.tistory.com/330?msclkid=39399ca2d0c411ecbf8db70e54aefdd9
+-->
+
+<script type="text/javascript">  
+    function getIP(json) {
+        document.write(json.ip);
+    }
+</script>
+
+<script type="text/javascript">
+    function changeBg(color){
+        
+        if (color == "gifs/pepe punch.gif") {
+            document.getElementById("animation").src = color;
+        }
+
+        else if (color == "gifs/artist.gif") {
+            document.getElementById("animation").src = color;
+        }
+
+        else if (color == "gifs/reva.gif") {
+            document.getElementById("animation").src = color;
+        }
+
+        else if (color == "gifs/pepe super punch.gif") {
+            document.getElementById("animation").src = color;
+        }
+    
+    } 
+    </script>
+
+<!-- 전광판 JS -->
+    <script type="text/javascript">
+    const fileInput = document.getElementById("fileUpload");
+
+    const handleFiles = (e) => {
+    const selectedFile = [...fileInput.files];
+    const fileReader = new FileReader();
+
+    fileReader.readAsDataURL(selectedFile[0]);
+
+    fileReader.onload = function () {
+        document.getElementById("display").src = fileReader.result;
+    };
+};
+
+fileInput.addEventListener("change", handleFiles);
+    </script>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!--metadata-->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>koa-nas</title>
+
+<!-- 카카오톡 등의 사이트에 링크 공유할 때 뜨는 미리보기 정보 -->
+ <meta property="og:title" content="KOA-NAS server" />
+ <meta property="og:type" content="NAS" />
+
+
+    
+    <style>
+        
+
+        test-box {
+            float: right;
+        }
+
+        div {
+            background-color: rgb(56, 55, 55);
+            line-height:90px;
+            cursor: pointer;
+        }
+
+        th { 
+            text-align: left;
+            color: white;
+        }
+
+        td {
+            color:white;
+        }
+
+
+        img {         
+            float:left;    
+        }
+
+       p.textlink {
+            display: inline;
+            cursor: pointer;
+       }
+       
+       h1 {
+           color:white;
+       }
+
+       h1.intro {
+        display:inline;
+       }
+           
+        
+      /* 우분투 아이콘 회전 */
+       img.running-icon {
+        animation: rotate_image 2s linear infinite;
+        transform-origin: 50% 50%;
+       }
+
+       @keyframes rotate_image{
+           100% {
+               transform: rotate(360deg);
+           }
+       }
+
+    </style>
+
+</head>
+
+
+
+<body bgcolor="#242424">
+   
+
+    <top> <!-- 최상단 -->
+        
+         <!-- 아이피 체커-->
+        <h1 class="intro">Welcome, </h1>
+        <h1 class="intro"><script type="text/javascript" src="https://api.ipify.org?format=jsonp&callback=getIP"></script></h1>
+        <br>
+
+       <!--아파치 부분 누르면 아파치 페이지 뜸-->
+       <apache  OnClick="location.href='http://xross.kr/apacheindex.html'">
+        <img class="running-icon" src="logos/ubuntu icon.png" alt="wrong" height="18px">
+        <p class="textlink" style="color:whitesmoke;"> &nbsp;Apache Is Running! </p>
+    </apache>
+
+    <test-box>
+        <button OnClick="location.href='http://xross.kr:5500/web/server%20main%20page/'" >VS PreView</button>
+        <button>Speed check</button>
+        <button>Apply changes</button>
+    </test-box>      
+    </top>
+
+    <hr> <!-- 이거 구분선임 -->
+
+    <table  width="100%" border="0px">
+
+        <th width="50%">  <!-- 개인 서버 -->
+            <img src="logos/nas icon.png" alt="wrong" height="50px"> 
+            <h2>&nbsp;&nbsp; NAS</h2>
+        </th>
+
+      
+        
+            
+
+        <tr>  <!-- 1오 -->
+            <td> <!--넥스트 클라우드-->
+                <div id='nextcloud-button' OnClick="location.href='http://nas.xross.kr'">
+                <img id='icons' src="logos/nextcloud icon.png" alt="wrong" height="90px" width="90px">
+                <h3>&nbsp Cloud</h3>   
+                </div>
+            </td>  <!--nas 서비스-->
+
+ 
+        </tr>
+
+        <tr>  <!-- 2오 -->
+            <td> <!--vs code-->
+                <div id='vscode-button' OnClick="location.href='http://203.250.133.168:8080'">
+                <img id='icons' src="logos/vscode icon.png" alt="wrong" height="90px" width="90px">
+                <h3>&nbsp VS code</h3> 
+                </div>
+            </td>
+
+        </tr>
+
+        <tr> 
+                <td> <!--홈 브릿지인데 이거 안쓰긴 해-->
+                    <div id='homebridge-button' OnClick="location.href='http://203.250.133.168:8581/login'">
+                      <img id='icons' src="logos/homebridge icon.png" alt="wrong" height="90px" height="90px">
+                      <h3>&nbsp Bridge</h>
+                </td>
+
+        </tr>
+
+        <tr> <!--네 번째 줄-->
+            <td></td>
+    </tr>
+
+    </table>
+
+    <hr>
+    
+    <!-- 움짤 -->
+        <mid class='animation'>
+        <img id='animation' src="gifs/춘배 우와.gif" alt="wrong"  width="20%">
+        </mid>
+
+       
+     <!--라디오 버튼으로 선택해서 움짤 재생되게 할건데 나중엔 파일 업로드 해서 하게 할 예정-->
+     <body>
+
+        <input type = "radio" name="bgColor" value = "gifs/pepe punch.gif" onclick="changeBg(this.value)">봄베이 펀치<br>
+        <input type = "radio" name="bgColor" value = "gifs/artist.gif" onclick="changeBg(this.value)">도아가<br>
+        <input type = "radio" name="bgColor" value = "gifs/pepe super punch.gif" onclick="changeBg(this.value)">개구리 펀치<br>
+        <input type = "radio" name="bgColor" value = "gifs/reva.gif" onclick="changeBg(this.value)">레바<br>
+    
+    </body>
+     
+  
+        <!-- 전광판 -->
+        <br><br>
+        <img id='display' src="gifs/pepe punch.gif" alt="wrong"  width="20%">
+        <form></form>
+            <input id = "fileUpload" type = "file" name = "fileupload" accept = "image/*"/>
+         </form>
+
+         
+
+
+</body>
+</html>
