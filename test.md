@@ -1,2 +1,2 @@
 #page link
-[xross.kr]
+[xross.kr](https://xross.kr)
