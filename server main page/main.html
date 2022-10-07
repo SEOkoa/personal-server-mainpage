@@ -3,11 +3,18 @@
     js 이미지 업로드 https://developer-talk.tistory.com/330?msclkid=39399ca2d0c411ecbf8db70e54aefdd9
 -->
 
+<!--    할 일
+    1. code-server 주소를 서브도메인이나 alias 식으로 xross.kr/code로 접속하게 할 수 있는가?  -> 안된다면 삭제도 고려
+    2. 파일 구조를 실제 서버와 같게 바꾸어야 한번에 바꿀 수 있음
+    3. Let's encrypt에서 서브도메인까지 인증 가능한 방법이 있다고 알고 있음 https://oasisfores.com/letsencrypt-wildcard-ssl-certificate/
+    4. 파일이 너무 더러워서 다른 기능 추가에 앞서서 css, js 파일을 나눌 필요가 있음
+-->
+
 
 <!-- git uploaded at 13/5/2022-->
 <!-- push pull plug-in test -->
 
-<script type="text/javascript">  
+<script type="text/javascript">
     function getIP(json) {
         document.write(json.ip);
     }
@@ -130,7 +137,6 @@ fileInput.addEventListener("change", handleFiles);
 
 <body bgcolor="#242424">
    
-
     <top> <!-- 최상단 -->
         
          <!-- 아이피 체커-->
@@ -139,19 +145,19 @@ fileInput.addEventListener("change", handleFiles);
         <br>
 
        <!--아파치 부분 누르면 아파치 페이지 뜸-->
-       <apache  OnClick="location.href='http://xross.kr/apacheindex.html'">
+       <apache  OnClick="location.href='https://xross.kr/apacheindex.html'">
         <img class="running-icon" src="logos/ubuntu icon.png" alt="wrong" height="18px">
         <p class="textlink" style="color:whitesmoke;"> &nbsp;Apache Is Running! </p>
     </apache>
 
-    <test-box>
-        <button OnClick="location.href='http://xross.kr:5500/web/server%20main%20page/'" >VS PreView</button>
+    <test-box> <!-- 상단 우측에 있는 버튼들 -->
+        <button OnClick="location.href='http://localhost:5500'" >VS PreView</button> <!-- vs code live server -->
         <button>Speed check</button>
         <button>Apply changes</button>
     </test-box>      
     </top>
 
-    <hr> <!-- 이거 구분선임 -->
+    <hr>
 
     <table  width="100%" border="0px">
 
@@ -160,24 +166,20 @@ fileInput.addEventListener("change", handleFiles);
             <h2>&nbsp;&nbsp; NAS</h2>
         </th>
 
-      
-        
-            
-
-        <tr>  <!-- 1오 -->
+        <tr> 
             <td> <!--넥스트 클라우드-->
-                <div id='nextcloud-button' OnClick="location.href='http://nas.xross.kr'">
+                <div id='nextcloud-button' OnClick="location.href='http://xross.kr/nextcloud'">
                 <img id='icons' src="logos/nextcloud icon.png" alt="wrong" height="90px" width="90px">
                 <h3>&nbsp Cloud</h3>   
                 </div>
-            </td>  <!--nas 서비스-->
+            </td>  
 
  
         </tr>
 
-        <tr>  <!-- 2오 -->
+        <tr> 
             <td> <!--vs code-->
-                <div id='vscode-button' OnClick="location.href='http://myip:8080'">
+                <div id='vscode-button' OnClick="location.href='http://203.250.133.168:8080'">
                 <img id='icons' src="logos/vscode icon.png" alt="wrong" height="90px" width="90px">
                 <h3>&nbsp VS code</h3> 
                 </div>
@@ -186,20 +188,22 @@ fileInput.addEventListener("change", handleFiles);
         </tr>
 
         <tr> 
-                <td> <!--홈 브릿지인데 이거 안쓰긴 해-->
-                    <div id='homebridge-button' OnClick="location.href='http://myip:8581/login'">
-                      <img id='icons' src="logos/homebridge icon.png" alt="wrong" height="90px" height="90px">
-                      <h3>&nbsp Bridge</h>
-                </td>
+             <td> <!-- 갤러리 -->
+                <div id='Gallery-button' OnClick="location.href='http://photo.xross.kr'">
+                <img id='icons' src="logos/camerashutter.png" alt="wrong" height="90px" height="90px">
+                <h3>&nbsp Gallery</h3>
+            </td>
 
         </tr>
 
-        <tr> <!--네 번째 줄-->
-            <td></td>
+        <tr> 
+            <td> <!--블로그 바로가기-->
+                <div id='blog-button' OnClick="location.href='http://blog.xross.kr'">
+                <img id='icons' src="logos/tistory_icon.png" alt="wrong" height="90px" height="90px">
+                <h3>&nbsp BLOG</h3>
+            </td>
     </tr>
-
     </table>
-
     <hr>
     
     <!-- 움짤 -->
@@ -217,17 +221,6 @@ fileInput.addEventListener("change", handleFiles);
         <input type = "radio" name="bgColor" value = "gifs/reva.gif" onclick="changeBg(this.value)">레바<br>
     
     </body>
-     
-  
-        <!-- 전광판 -->
-        <br><br>
-        <img id='display' src="gifs/pepe punch.gif" alt="wrong"  width="20%">
-        <form></form>
-            <input id = "fileUpload" type = "file" name = "fileupload" accept = "image/*"/>
-         </form>
-
          
-
-
 </body>
 </html>
