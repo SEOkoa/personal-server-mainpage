@@ -81,20 +81,45 @@
 }
 
 .main-banner {
-  width: 100%;
-  height: 200px;
+  width: 100vw;
+  height: 50px;
   background: linear-gradient(90deg, rgba(255,0,150,0.3), rgba(0,204,255,0.3));
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   animation: fadeIn 3s ease-in-out;
-  margin-bottom: 20px; /* 아래 여백 추가 */
+  padding-left: 20px; /* 좌측 여백 추가 */
+  padding-right: 20px; /* 우측 여백 추가 */
+  transition: background 0.3s ease;
+}
+
+.main-banner-icons {
+  display: flex;
+  align-items: center;
+}
+
+.main-banner.scrolled {
+  background: linear-gradient(90deg, rgb(186, 0, 109), rgb(0, 137, 171));
 }
 
 .main-banner-text {
   font-size: 2em;
   color: #ffffff;
   animation: textSlideIn 2s ease-in-out;
+  margin: 0;
+  font-family: 'Gothic', sans-serif; /* 고딕체로 변경 */
+}
+
+.main-banner-tab {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 1em;
+  font-family: 'Gothic', sans-serif;
+  transition: color 0.3s ease;
+}
+
+.main-banner-tab:hover {
+  color: #ff0096;
 }
 
 .banner {
@@ -295,6 +320,59 @@
   margin: 0;
   font-size: 0.9em;
   color: #fdfdfd;
+}
+
+.login-dialog {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1001;
+}
+
+.login-dialog-content {
+  background-color: #202020; /* 다크 그레이로 변경 */
+  padding: 20px;
+  border-radius: 5px;
+  text-align: center;
+  width: 300px;
+}
+
+.login-dialog-content input {
+  width: calc(100% - 20px); /* 오른쪽 마진 추가 */
+  padding: 10px;
+  margin: 10px 10px 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.login-dialog-content button {
+  width: calc(100% - 20px); /* 오른쪽 마진 추가 */
+  padding: 10px;
+  background-color: #333; /* 다크 그레이로 변경 */
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.login-dialog-content button:hover {
+  background-color: #1f1f1f; /* 다크 그레이로 변경 */
+}
+
+.login-dialog-content .close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 20px;
+  cursor: pointer;
+  margin-right: 0; /* 우측 마진 제거 */
+  margin-top: 0; /* 상단 마진 제거 */
 }
 
 
