@@ -1,0 +1,139 @@
+.photo-section {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0;
+  overflow: hidden;
+}
+
+.slick-slider {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.slide-item {
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+
+.slider-image {
+  width: 100%;
+  height: auto;
+  max-height: 600px;
+  object-fit: contain;
+  border-radius: 8px;
+  margin: 0 auto;
+  display: block;
+}
+
+.slick-dots {
+  bottom: 20px;
+}
+
+.slick-dots li button:before {
+  color: white;
+  opacity: 0.8;
+}
+
+.slick-dots li.slick-active button:before {
+  color: white;
+  opacity: 1;
+}
+
+.slick-prev,
+.slick-next {
+  z-index: 1;
+}
+
+.slick-prev {
+  left: 20px;
+}
+
+.slick-next {
+  right: 20px;
+}
+
+.slick-slide {
+  float: none;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.slick-track {
+  display: flex;
+  align-items: center;
+}
+
+.custom-dots {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-align: center;
+}
+
+.custom-dots li {
+  display: inline-block;
+  margin: 0 6px;
+}
+
+.custom-dots li button {
+  width: 10px;
+  height: 10px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  font-size: 0;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  padding: 0;
+}
+
+.custom-dots li.slick-active button {
+  background: #ffffff;
+  transform: scale(1.2);
+}
+
+.custom-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+  width: 40px;
+  height: 40px;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  opacity: 0;
+}
+
+.photo-section:hover .custom-arrow {
+  opacity: 1;
+}
+
+.custom-arrow:hover {
+  background: rgba(0, 0, 0, 0.8);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.slick-prev.custom-arrow {
+  left: 20px;
+}
+
+.slick-next.custom-arrow {
+  right: 20px;
+}
+
+/* 모바일에서는 항상 보이도록 */
+@media (max-width: 768px) {
+  .custom-arrow {
+    opacity: 1;
+  }
+}

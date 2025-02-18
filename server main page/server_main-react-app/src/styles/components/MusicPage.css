@@ -1,0 +1,15 @@
+.music-page {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.music-content {
+  margin-top: 30px;
+}
+
+.playlist-frame {
+  width: 100%;
+  border: none;
+  border-radius: 8px;
+}

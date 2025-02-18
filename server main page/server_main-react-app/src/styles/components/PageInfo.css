@@ -1,0 +1,21 @@
+.page-info {
+  width: 100%;
+  margin-top: auto;
+  padding: 40px 20px;
+  background-color: rgba(16, 16, 16, 0.8);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.made-by {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.made-by img {
+  height: 30px;
+  vertical-align: middle;
+}
