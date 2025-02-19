@@ -10,6 +10,7 @@ import PhotoPage from './components/pages/PhotoPage';
 import PageInfo from './components/common/PageInfo';
 import './App.css';
 import './styles/global.css';
+import { LoginProvider } from './contexts/LoginContext';
 
 function App() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -23,47 +24,49 @@ function App() {
   }, []);
 
   return (
-    <HashRouter>
-      <div className="app-container">
-        <header className={`main-banner ${isScrolled ? 'scrolled' : ''}`}>
-          <div className="menu-button" onClick={() => setShowMenu(true)}>
-            <div className="menu-icon"></div>
-          </div>
-          
-          <div className="banner-title">
-            <img src={xrossLogo} alt="Xross Logo" />
-            <h1>Xross.kr</h1>
-          </div>
+    <LoginProvider>
+      <HashRouter>
+        <div className="app-container">
+          <header className={`main-banner ${isScrolled ? 'scrolled' : ''}`}>
+            <div className={`menu-button ${showMenu ? 'menu-active' : ''}`} onClick={() => setShowMenu(!showMenu)}>
+              <div className="menu-icon"></div>
+            </div>
+            
+            <div className="banner-title">
+              <img src={xrossLogo} alt="Xross Logo" />
+              <h1>Xross.kr</h1>
+            </div>
 
-          <div className="settings-button">
-            <img 
-              src={settingLogo} 
-              alt="Settings"
-              onClick={() => setShowLoginDialog(true)}
-            />
-          </div>
-        </header>
+            <div className="settings-button">
+              <img 
+                src={settingLogo} 
+                alt="Settings"
+                onClick={() => setShowLoginDialog(true)}
+              />
+            </div>
+          </header>
 
-        <MenuOverlay 
-          isVisible={showMenu} 
-          onClose={() => setShowMenu(false)} 
-        />
-        <LoginDialog 
-          isVisible={showLoginDialog} 
-          onClose={() => setShowLoginDialog(false)} 
-        />
+          <MenuOverlay 
+            isVisible={showMenu} 
+            onClose={() => setShowMenu(false)} 
+          />
+          <LoginDialog 
+            isVisible={showLoginDialog} 
+            onClose={() => setShowLoginDialog(false)} 
+          />
 
-        <main className="main-content">
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/music" element={<MusicPage />} />
-            <Route path="/photo" element={<PhotoPage />} />
-          </Routes>
-        </main>
+          <main className="main-content">
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/music" element={<MusicPage />} />
+              <Route path="/photo" element={<PhotoPage />} />
+            </Routes>
+          </main>
 
-        <PageInfo />
-      </div>
-    </HashRouter>
+          <PageInfo />
+        </div>
+      </HashRouter>
+    </LoginProvider>
   );
 }
 

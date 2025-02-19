@@ -11,6 +11,12 @@ const MenuOverlay = ({ isVisible, onClose }) => {
         <Link to="/" className="menu-item" onClick={onClose}>Home</Link>
         <Link to="/music" className="menu-item" onClick={onClose}>Music</Link>
         <Link to="/photo" className="menu-item" onClick={onClose}>Photo</Link>
+        <a href="https://blog.xross.kr" 
+           className="menu-item" 
+           target="_blank" 
+           rel="noopener noreferrer">
+          Blog
+        </a>
       </div>
     </div>
   );

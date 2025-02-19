@@ -1,16 +1,24 @@
 .music-section {
+  width: 100%;
   padding: 20px;
+  display: flex;
+  justify-content: center;
 }
 
 .curation-md-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
   display: flex;
   gap: 20px;
+  justify-content: center;
   flex-wrap: wrap;
 }
 
 .playlist-container {
   flex: 1;
-  min-width: 300px;
+  min-width: 450px;
+  max-width: 100%;
 }
 
 .playlist-frame {
@@ -28,5 +36,6 @@ h2 {
 @media (max-width: 768px) {
   .playlist-container {
     width: 100%;
+    min-width: unset;
   }
 }
