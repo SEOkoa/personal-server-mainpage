@@ -22,7 +22,6 @@ const SocialIcon = ({ href, icon, label }) => (
 const PageInfo = () => {
   return (
     <footer className="page-info">
-      <hr />
       <div className="page-info-content">
         <div className="page-info-left">
           <h3>Powered by.</h3>

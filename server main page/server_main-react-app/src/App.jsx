@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { HashRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import xrossLogo from './assets/Xross logo.svg';
 import settingLogo from './assets/setting icon.svg';
 import MenuOverlay from './components/layout/MenuOverlay';
@@ -25,7 +25,7 @@ function App() {
 
   return (
     <LoginProvider>
-      <HashRouter>
+      <Router>
         <div className="app-container">
           <header className={`main-banner ${isScrolled ? 'scrolled' : ''}`}>
             <div className={`menu-button ${showMenu ? 'menu-active' : ''}`} onClick={() => setShowMenu(!showMenu)}>
@@ -65,7 +65,7 @@ function App() {
 
           <PageInfo />
         </div>
-      </HashRouter>
+      </Router>
     </LoginProvider>
   );
 }

@@ -1,11 +1,12 @@
-body {
+html, body {
   margin: 0;
   padding: 0;
+  min-height: 100vh;
+  background-color: #121212;
+  color: #ffffff;
   font-family: 'Gothic', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #121212;
-  color: #ffffff;
 }
 
 * {
@@ -39,4 +40,18 @@ img {
 .home-container {
   margin-top: 50px;  /* 메인배너 높이만큼 여백 추가 */
   width: 100%;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.app-container {
+  min-height: 100vh;
+  background-color: transparent;
+}
+
+.main-content {
+  background-color: transparent;
+  min-height: calc(100vh - 50px);  /* 메인 배너 높이를 제외한 전체 높이 */
 }
