@@ -3,11 +3,12 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import xrossLogo from './assets/Xross logo.svg';
 import settingLogo from './assets/setting icon.svg';
 import MenuOverlay from './components/layout/MenuOverlay';
-import LoginDialog from './components/layout/LoginDialog';
+import AuthDialog from './components/layout/AuthDialog';
 import HomePage from './components/pages/HomePage';
 import MusicPage from './components/pages/MusicPage';
 import PhotoPage from './components/pages/PhotoPage';
 import PageInfo from './components/common/PageInfo';
+import WriteButton from './components/common/WriteButton';
 import './App.css';
 import './styles/global.css';
 import { LoginProvider } from './contexts/LoginContext';
@@ -50,7 +51,7 @@ function App() {
             isVisible={showMenu} 
             onClose={() => setShowMenu(false)} 
           />
-          <LoginDialog 
+          <AuthDialog 
             isVisible={showLoginDialog} 
             onClose={() => setShowLoginDialog(false)} 
           />
@@ -64,6 +65,7 @@ function App() {
           </main>
 
           <PageInfo />
+          <WriteButton />
         </div>
       </Router>
     </LoginProvider>

@@ -30,3 +30,56 @@ hr {
   height: 30px;
   vertical-align: middle;
 }
+
+.error-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 300px;
+  padding: 20px;
+}
+
+.error-message {
+  background-color: rgba(255, 0, 0, 0.1);
+  border: 1px solid #ff0000;
+  padding: 20px;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.error-message h2 {
+  color: #ff0000;
+  margin-bottom: 10px;
+}
+
+.error-message small {
+  display: block;
+  margin-top: 10px;
+  color: #999;
+}
+
+.error-details {
+  background-color: rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  margin: 10px 0;
+  border-radius: 4px;
+  text-align: left;
+}
+
+.error-details h3 {
+  margin-bottom: 10px;
+  font-size: 0.9em;
+  color: #ff6b6b;
+}
+
+.error-details ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.error-details li {
+  margin: 5px 0;
+  font-size: 0.85em;
+  font-family: monospace;
+}

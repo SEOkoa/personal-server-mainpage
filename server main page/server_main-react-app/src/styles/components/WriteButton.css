@@ -1,0 +1,27 @@
+.floating-write-button {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s, background-color 0.2s;
+  z-index: 1000;
+}
+
+.floating-write-button:hover {
+  transform: scale(1.1);
+  background-color: #357abd;
+}
+
+.floating-write-button .material-icons {
+  font-size: 24px;
+}

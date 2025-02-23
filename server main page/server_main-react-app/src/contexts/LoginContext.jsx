@@ -1,40 +1,29 @@
-import React, { createContext, useState, useContext, useEffect } from 'react';
-import { login as loginApi, verifyToken } from '../services/authService';
+import React, { createContext, useState, useEffect } from 'react';
+import { verifyToken } from '../services/authService';
 
-const LoginContext = createContext(null);
+export const LoginContext = createContext(null);
 
 export const LoginProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [userInfo, setUserInfo] = useState(null);
 
   useEffect(() => {
-    const checkAuth = async () => {
-      const valid = await verifyToken();
-      setIsLoggedIn(valid);
-      setLoading(false);
+    const checkLoginStatus = async () => {
+      const isValid = await verifyToken();
+      if (isValid) {
+        setIsLoggedIn(true);
+        setUserInfo({
+          username: localStorage.getItem('username'),
+          email: localStorage.getItem('email')
+        });
+      }
     };
-    checkAuth();
+
+    checkLoginStatus();
   }, []);
 
-  const login = async (username, password) => {
-    try {
-      const result = await loginApi(username, password);
-      setIsLoggedIn(true);
-      return { success: true };
-    } catch (err) {
-      return { success: false, error: err.message };
-    }
-  };
-
-  const logout = () => {
-    localStorage.removeItem('token');
-    setIsLoggedIn(false);
-  };
-
-  if (loading) return null;
-
   return (
-    <LoginContext.Provider value={{ isLoggedIn, login, logout }}>
+    <LoginContext.Provider value={{ isLoggedIn, setIsLoggedIn, userInfo, setUserInfo }}>
       {children}
     </LoginContext.Provider>
   );

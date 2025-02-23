@@ -1,14 +1,23 @@
 import React, { useState, useContext } from 'react';
 import { LoginContext } from '../../contexts/LoginContext';
 import { login } from '../../services/authService';
-import '../../styles/components/LoginDialog.css';
+import '../../styles/components/AuthDialog.css';
 
-const LoginDialog = ({ isVisible, onClose }) => {
+const AuthDialog = ({ isVisible, onClose }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const { setIsLoggedIn, setUserInfo } = useContext(LoginContext);
+  const { isLoggedIn, setIsLoggedIn, userInfo, setUserInfo } = useContext(LoginContext);
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('username');
+    localStorage.removeItem('email');
+    setIsLoggedIn(false);
+    setUserInfo(null);
+    onClose();
+  };
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -16,10 +25,7 @@ const LoginDialog = ({ isVisible, onClose }) => {
     setIsLoading(true);
 
     try {
-      console.log('로그인 시도:', { username });
       const response = await login(username, password);
-      console.log('로그인 성공:', response);
-      
       setIsLoggedIn(true);
       setUserInfo({
         username: response.username,
@@ -27,8 +33,7 @@ const LoginDialog = ({ isVisible, onClose }) => {
       });
       onClose();
     } catch (err) {
-      console.error('로그인 실패:', err);
-      setError(err.message || '로그인에 실패했습니다.');
+      setError(err.message);
     } finally {
       setIsLoading(false);
     }
@@ -36,9 +41,30 @@ const LoginDialog = ({ isVisible, onClose }) => {
 
   if (!isVisible) return null;
 
+  if (isLoggedIn) {
+    return (
+      <div className="auth-overlay">
+        <div className="auth-dialog">
+          <button className="close-button" onClick={onClose}>&times;</button>
+          <h2>사용자 정보</h2>
+          <div className="user-info">
+            <p>사용자: {userInfo?.username}</p>
+            <p>이메일: {userInfo?.email}</p>
+          </div>
+          <button 
+            className="logout-button" 
+            onClick={handleLogout}
+          >
+            로그아웃
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="login-overlay">
-      <div className="login-dialog">
+    <div className="auth-overlay">
+      <div className="auth-dialog">
         <button className="close-button" onClick={onClose}>&times;</button>
         <h2>로그인</h2>
         
@@ -74,4 +100,4 @@ const LoginDialog = ({ isVisible, onClose }) => {
   );
 };
 
-export default LoginDialog;
+export default AuthDialog;
