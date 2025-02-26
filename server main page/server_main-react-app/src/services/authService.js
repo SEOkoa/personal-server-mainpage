@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // API URL 설정 명확화
 const API_URL = window.location.hostname === 'localhost' 
-  ? 'http://localhost:5000/api'
+  ? 'http://127.0.0.1:5000/api'
   : 'https://xross.kr/api';
 
 const axiosInstance = axios.create({

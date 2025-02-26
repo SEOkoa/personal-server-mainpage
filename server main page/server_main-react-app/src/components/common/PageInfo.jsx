@@ -8,6 +8,9 @@ import apacheLogo from '../../assets/powered by/apache-icon.png';
 import viteLogo from '../../assets/powered by/vite.svg';
 import musickitLogo from '../../assets/powered by/apple-music-media-api-128x128_2x.png';
 import reactLogo from '../../assets/react.svg';
+import nodeJsLogo from '../../assets/powered by/Node.js_logo.svg';
+import pm2Logo from '../../assets/powered by/pm2-logo.png';
+import mariadbLogo from '../../assets/powered by/mariadb-icon.png';
 import '../../styles/components/PageInfo.css';
 
 const SocialIcon = ({ href, icon, label }) => (
@@ -19,6 +22,12 @@ const SocialIcon = ({ href, icon, label }) => (
   </div>
 );
 
+const TechIcon = ({ href, icon, alt }) => (
+  <a href={href} target="_blank" rel="noopener noreferrer">
+    <img src={icon} alt={alt} />
+  </a>
+);
+
 const PageInfo = () => {
   return (
     <footer className="page-info">
@@ -26,11 +35,14 @@ const PageInfo = () => {
         <div className="page-info-left">
           <h3>Powered by.</h3>
           <div className="powered-by-icons">
-            <img src={ubuntuLogo} alt="Ubuntu" />
-            <img src={apacheLogo} alt="Apache" />
-            <img src={viteLogo} alt="Vite" />
-            <img src={musickitLogo} alt="Musickit" />
-            <img src={reactLogo} alt="React" />
+            <TechIcon href="https://ubuntu.com/" icon={ubuntuLogo} alt="Ubuntu" />
+            <TechIcon href="https://httpd.apache.org/" icon={apacheLogo} alt="Apache" />
+            <TechIcon href="https://vitejs.dev/" icon={viteLogo} alt="Vite" />
+            <TechIcon href="https://developer.apple.com/documentation/musickitjs" icon={musickitLogo} alt="Musickit" />
+            <TechIcon href="https://react.dev/" icon={reactLogo} alt="React" />
+            <TechIcon href="https://nodejs.org/" icon={nodeJsLogo} alt="Node.js" />
+            <TechIcon href="https://pm2.keymetrics.io/" icon={pm2Logo} alt="PM2" />
+            <TechIcon href="https://mariadb.org/" icon={mariadbLogo} alt="MariaDB" />
           </div>
         </div>
 

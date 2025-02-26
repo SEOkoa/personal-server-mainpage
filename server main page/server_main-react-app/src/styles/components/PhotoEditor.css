@@ -1,0 +1,507 @@
+/* 사진 에디터 컨테이너 */
+.photo-editor-container {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  overflow: hidden;
+  background-color: #222;
+  color: #eee;
+  border-radius: 8px;
+  padding: 20px;
+  max-width: 800px; /* 에디터 최대 너비 제한 */
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.photo-editor-main {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex-grow: 1;
+  overflow-y: auto;
+  width: 100%;
+}
+
+/* 이미지 업로드 및 미리보기 */
+.photo-upload-section {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 0;
+  padding-bottom: 75%; /* 4:3 비율 */
+  background-color: #333;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.image-dropzone {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 2px dashed #555;
+  border-radius: 8px;
+}
+
+.image-dropzone.active {
+  border-color: #4a90e2;
+  background-color: rgba(74, 144, 226, 0.1);
+}
+
+.upload-prompt {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.upload-icon {
+  font-size: 48px;
+  color: #aaa;
+}
+
+.upload-subtitle {
+  color: #aaa;
+  font-size: 14px;
+}
+
+/* 이미지 미리보기 및 크롭 */
+.image-preview-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  cursor: move;
+  background-color: #111;
+}
+
+.image-crop-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-crop-overlay::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: calc(100% * var(--crop-width, 1));
+  height: calc(100% * var(--crop-height, 1));
+  box-shadow: 0 0 0 2000px rgba(0, 0, 0, 0.7);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.image-preview-container[data-ratio="1:1"] .image-crop-overlay::after {
+  --crop-width: 1;
+  --crop-height: 1;
+}
+
+.image-preview-container[data-ratio="2:1"] .image-crop-overlay::after {
+  --crop-width: 1;
+  --crop-height: 0.5;
+}
+
+.image-preview-container[data-ratio="1:2"] .image-crop-overlay::after {
+  --crop-width: 0.5;
+  --crop-height: 1;
+}
+
+.image-preview-container[data-ratio="3:1"] .image-crop-overlay::after {
+  --crop-width: 1;
+  --crop-height: 0.33;
+}
+
+.image-preview-container[data-ratio="1:3"] .image-crop-overlay::after {
+  --crop-width: 0.33;
+  --crop-height: 1;
+}
+
+.image-preview-container[data-ratio="original"] .image-crop-overlay::after {
+  box-shadow: none;
+}
+
+.image-preview {
+  max-width: none;
+  max-height: none;
+  position: relative;
+  transition: none; /* 드래그 시 부드러운 전환 효과 제거 */
+  will-change: transform;
+  transform-origin: center;
+  object-fit: contain;
+}
+
+.image-preview-container[data-orientation="landscape"] .image-preview {
+  height: 100%;
+  width: auto;
+  min-width: 100%;
+}
+
+.image-preview-container[data-orientation="portrait"] .image-preview {
+  width: 100%;
+  height: auto;
+  min-height: 100%;
+}
+
+.crop-instructions {
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  color: white;
+  font-size: 14px;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 8px;
+  z-index: 3;
+}
+
+.crop-instructions p {
+  margin: 4px 0;
+}
+
+.change-image-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  z-index: 3;
+}
+
+.change-image-button:hover {
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+/* 편집 컨트롤 */
+.photo-edit-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.control-section {
+  padding: 15px;
+  background-color: #2a2a2a;
+  border-radius: 8px;
+  border: 1px solid #444;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.control-section h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: #eee;
+  font-size: 16px;
+  border-bottom: 1px solid #444;
+  padding-bottom: 8px;
+}
+
+/* 이미지 비율 선택기 */
+.image-ratio-selector {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ratio-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.ratio-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  background-color: #444;
+  border: 1px solid #555;
+  border-radius: 4px;
+  padding: 8px;
+  cursor: pointer;
+  color: #eee;
+}
+
+.ratio-option.selected {
+  background-color: #4a90e2;
+  border-color: #4a90e2;
+}
+
+.ratio-preview {
+  width: 40px;
+  height: 30px;
+  background-color: #666;
+  border-radius: 2px;
+  position: relative;
+}
+
+.ratio-preview::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #eee;
+}
+
+.ratio-preview[data-ratio="1:1"]::after {
+  width: 24px;
+  height: 24px;
+}
+
+.ratio-preview[data-ratio="2:1"]::after {
+  width: 32px;
+  height: 16px;
+}
+
+.ratio-preview[data-ratio="1:2"]::after {
+  width: 16px;
+  height: 32px;
+}
+
+.ratio-preview[data-ratio="3:1"]::after {
+  width: 36px;
+  height: 12px;
+}
+
+.ratio-preview[data-ratio="1:3"]::after {
+  width: 12px;
+  height: 36px;
+}
+
+.ratio-preview[data-ratio="original"]::after {
+  width: 28px;
+  height: 20px;
+}
+
+/* EXIF 에디터 */
+.exif-editor {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.exif-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px 20px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.exif-field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.exif-field label {
+  font-size: 14px;
+  color: #ccc;
+}
+
+.exif-field input {
+  padding: 8px;
+  border: 1px solid #444;
+  border-radius: 4px;
+  background-color: #222;
+  color: #eee;
+}
+
+.exif-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+.reset-exif-button {
+  background-color: #444;
+  color: #eee;
+  border: 1px solid #555;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* 프리셋 매니저 */
+.preset-manager {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.preset-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.preset-item {
+  padding: 8px 12px;
+  background-color: #444;
+  border: 1px solid #555;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #eee;
+}
+
+.preset-item.selected {
+  background-color: #4a90e2;
+  color: white;
+  border-color: #4a90e2;
+}
+
+.no-presets {
+  color: #aaa;
+  font-style: italic;
+}
+
+.create-preset {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.create-preset input {
+  flex-grow: 1;
+  padding: 8px;
+  border: 1px solid #444;
+  border-radius: 4px;
+  background-color: #222;
+  color: #eee;
+}
+
+.create-preset-button,
+.save-preset-button,
+.cancel-preset-button {
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.create-preset-button,
+.save-preset-button {
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+}
+
+.cancel-preset-button {
+  background-color: #444;
+  color: #eee;
+  border: 1px solid #555;
+}
+
+/* 크롭 가이드라인 */
+.crop-grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+}
+
+.crop-grid::before,
+.crop-grid::after {
+  content: '';
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+/* 수직 선 */
+.crop-grid::before {
+  width: 1px;
+  height: 100%;
+  left: 33.33%;
+}
+
+.crop-grid::after {
+  width: 1px;
+  height: 100%;
+  left: 66.66%;
+}
+
+/* 수평 선 */
+.crop-grid-horizontal {
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+.crop-grid-horizontal:nth-child(1) {
+  top: 33.33%;
+}
+
+.crop-grid-horizontal:nth-child(2) {
+  top: 66.66%;
+}
+
+/* 크롭 영역 스타일 */
+.crop-area {
+  position: absolute;
+  border: 2px solid #fff;
+  box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.7);
+  box-sizing: border-box;
+  cursor: move;
+}
+
+/* 크롭 핸들 스타일 */
+.crop-handle {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background-color: #fff;
+  border: 1px solid #333;
+  border-radius: 2px;
+}
+
+.handle-nw { top: -6px; left: -6px; cursor: nw-resize; }
+.handle-n  { top: -6px; left: 50%; margin-left: -6px; cursor: n-resize; }
+.handle-ne { top: -6px; right: -6px; cursor: ne-resize; }
+.handle-w  { top: 50%; left: -6px; margin-top: -6px; cursor: w-resize; }
+.handle-e  { top: 50%; right: -6px; margin-top: -6px; cursor: e-resize; }
+.handle-sw { bottom: -6px; left: -6px; cursor: sw-resize; }
+.handle-s  { bottom: -6px; left: 50%; margin-left: -6px; cursor: s-resize; }
+.handle-se { bottom: -6px; right: -6px; cursor: se-resize; }

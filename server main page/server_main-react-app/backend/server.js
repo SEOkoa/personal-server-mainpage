@@ -15,9 +15,9 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// CORS 옵션 수정: 개발 환경도 허용
+// CORS 옵션 수정: 개발 환경과 프리뷰 환경도 허용
 const corsOptions = {
-  origin: ['https://xross.kr', 'http://localhost:5173'],
+  origin: ['https://xross.kr', 'http://localhost:5173'], // 5173은 vite 개발 기본 포트
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,

@@ -3,10 +3,22 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
+  define: {
+    global: 'globalThis',  // draft-js를 위한 global 객체 정의
+  },
   server: {
     proxy: {
       '/api': {
-        target: 'http://localhost:5000',
+        target: 'http://127.0.0.1:5000',
+        changeOrigin: true
+      }
+    }
+  },
+  preview: {
+    // 프리뷰 모드에서도 동일하게 프록시 설정 사용
+    proxy: {
+      '/api': {
+        target: 'http://127.0.0.1:5000',
         changeOrigin: true
       }
     }
@@ -14,11 +26,9 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     emptyOutDir: true,
-    // 청크 사이즈 경고 제한을 원하는 값으로 조정합니다.
-    chunkSizeWarningLimit: 600, // 기본 500kB에서 늘림
+    chunkSizeWarningLimit: 600,
     rollupOptions: {
       output: {
-        // 각 모듈을 필요한 기준에 따라 청크로 분리합니다.
         manualChunks(id) {
           if (id.includes('node_modules')) {
             return id.toString().split('node_modules/')[1].split('/')[0].toString();

@@ -96,12 +96,21 @@
 /* Powered By Styles */
 .powered-by-section {
   margin: 10px 0;
+  margin-top: 2rem;
+  padding: 1rem;
 }
 
 .powered-by-section h2 {
   font-size: 1em;
   margin-bottom: 10px;
   opacity: 1;
+}
+
+.powered-by-section h3 {
+  font-size: 0.9em;  /* 1.2rem에서 0.9em으로 변경하여 통일 */
+  margin: 5px 0;     /* margin-bottom: 1rem에서 변경하여 통일 */
+  font-weight: normal;
+  color: inherit;    /* #666에서 변경 */
 }
 
 .powered-by-icons {
@@ -112,15 +121,32 @@
   flex-wrap: wrap;
 }
 
-.powered-by-icons img {
-  height: 30px;
-  width: auto;
-  opacity: 1;  /* 0.6에서 1로 변경 */
-  transition: transform 0.2s;  /* opacity 대신 transform만 적용 */
+.powered-by-logos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
 }
 
-.powered-by-icons img:hover {
-  transform: scale(1.1);  /* hover 시 약간 확대 효과만 적용 */
+.powered-by-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.powered-by-icons img,
+.tech-logo {
+  height: 30px;
+  width: auto;
+  opacity: 1;
+  transition: transform 0.2s;
+  object-fit: contain;
+}
+
+.powered-by-icons img:hover,
+.tech-logo:hover {
+  transform: scale(1.1);
 }
 
 @media (max-width: 768px) {
